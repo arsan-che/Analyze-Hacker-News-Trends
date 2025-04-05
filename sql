@@ -14,3 +14,25 @@ FROM hacker_news
 GROUP BY user 
 HAVING SUM(score) > 200
 ORDER BY 2 DESC;
+
+-- Calculate the percentage of total scores contributed by specific users
+SELECT (517 + 309 + 304 + 282) / 6366.0;
+
+-- Hacker News Moderating: Count how many times each user posted a specific URL
+SELECT user,
+   COUNT(*)
+FROM hacker_news
+WHERE url LIKE '%watch?v=dQw4w9WgXcQ%'
+GROUP BY 1
+ORDER BY 2 DESC;
+
+-- Categorize stories based on their source and count the number of stories from each source
+SELECT CASE
+  WHEN url LIKE '%github.com%' THEN 'Github.com'
+  WHEN url LIKE '%https://medium.com/%' THEN 'MEDIUM'
+  WHEN url LIKE '%https://www.nytimes.com/%' THEN 'New York Times' 
+  ELSE 'Other'
+ END AS 'Source',
+ COUNT(*)
+FROM hacker_news
+GROUP BY 1;
