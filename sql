@@ -36,3 +36,19 @@ SELECT CASE
  COUNT(*)
 FROM hacker_news
 GROUP BY 1;
+
+-- Select the first 10 timestamps from the hacker_news table
+SELECT timestamp
+FROM hacker_news
+LIMIT 10;
+
+-- Calculate the average score and count of stories for each hour, ordering by average score in descending order
+SELECT strftime('%H', timestamp) AS 'hour', 
+      ROUND(AVG(score), 1) AS 'average_score', 
+      COUNT(*) AS 'number of stories'
+FROM hacker_news
+WHERE timestamp IS NOT NULL
+GROUP BY 1
+ORDER BY 2 DESC;
+
+
